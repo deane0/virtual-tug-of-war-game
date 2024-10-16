@@ -37,4 +37,36 @@ export const postRouter = {
   delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
     return ctx.db.delete(Post).where(eq(Post.id, input));
   }),
+
+  // isTyping: authedProcedure
+  //   .input(z.object({ typing: z.boolean() }))
+  //   .mutation(({ input, ctx }) => {
+  //     const { name } = ctx.user;
+  //     if (!input.typing) {
+  //       delete currentlyTyping[name];
+  //     } else {
+  //       currentlyTyping[name] = {
+  //         lastTyped: new Date(),
+  //       };
+  //     }
+  //     ee.emit("isTypingUpdate");
+  //   }),
+
+  // whoIsTyping: publicProcedure.subscription(() => {
+  //   let prev: string[] | null = null;
+  //   return observable<string[]>((emit) => {
+  //     const onIsTypingUpdate = () => {
+  //       const newData = Object.keys(currentlyTyping);
+
+  //       if (!prev || prev.toString() !== newData.toString()) {
+  //         emit.next(newData);
+  //       }
+  //       prev = newData;
+  //     };
+  //     ee.on("isTypingUpdate", onIsTypingUpdate);
+  //     return () => {
+  //       ee.off("isTypingUpdate", onIsTypingUpdate);
+  //     };
+  //   });
+  // }),
 } satisfies TRPCRouterRecord;
